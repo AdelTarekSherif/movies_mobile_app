@@ -8,13 +8,14 @@ void main() {
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "Movies App",
       initialRoute: RouteNames.rLandingPage,
       onGenerateRoute: RouteGenerator.generateRoute,
-      
     );
   }
 }

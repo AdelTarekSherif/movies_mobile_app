@@ -79,6 +79,7 @@ class AppTheme {
   static double arabicFontExtraPixels = 40;
 
   static landingTextStyle(context, {bool isBold = false}) => TextStyle(
+    wordSpacing: 3,
         fontSize: isBold? 26: 24,
         color: AppColors.customGreyLevelSubtitle1,
         fontWeight: isBold ? FontWeight.bold : FontWeight.w400,
