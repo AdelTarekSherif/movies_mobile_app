@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_mobile_app/ui/modules/home/home_page.dart';
 import 'package:movies_mobile_app/ui/modules/landing/landing_page.dart';
 import 'package:movies_mobile_app/utils/router/route_names.dart';
 
@@ -14,6 +15,11 @@ class RouteGenerator {
         return MaterialPageRoute(
           settings: const RouteSettings(name: RouteNames.rLandingPage),
           builder: (_) => const LandingPage(),
+        );
+      case RouteNames.rHomePage:
+        return MaterialPageRoute(
+          settings: const RouteSettings(name: RouteNames.rLandingPage),
+          builder: (_) => const HomePage(),
         );
       default:
         // If there is no such named route in the switch statement, e.g. /third

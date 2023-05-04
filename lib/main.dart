@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_mobile_app/bloc/movies/movies_bloc.dart';
+import 'package:movies_mobile_app/data/repository/movies/movies_repository.dart';
+import 'package:movies_mobile_app/utils/constants.dart';
 import 'package:movies_mobile_app/utils/router/route_generator.dart';
 import 'package:movies_mobile_app/utils/router/route_names.dart';
 
@@ -11,11 +15,17 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Movies App",
-      initialRoute: RouteNames.rLandingPage,
-      onGenerateRoute: RouteGenerator.generateRoute,
+    return MultiBlocProvider(
+
+      providers: [
+        BlocProvider(create: (context)=>MoviesBloc(MoviesRepository()),),
+      ],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: Constants.appName,
+        initialRoute: RouteNames.rLandingPage,
+        onGenerateRoute: RouteGenerator.generateRoute,
+      ),
     );
   }
 }

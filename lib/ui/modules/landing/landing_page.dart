@@ -34,8 +34,13 @@ class _LandingPageState extends State<LandingPage> {
       backgroundColor: AppColors.scaffoldBackgroundColor,
       body: Column(
         children: [
-          Image.asset(
-            'assets/images/poster.png',
+          Container(
+            width: MediaQuery.of(context).size.width,
+            color: Colors.white,
+            child: Image.asset(
+              'assets/images/poster.png',
+              fit: BoxFit.fill,
+            ),
           ),
           Expanded(
             child: Padding(
@@ -76,8 +81,8 @@ class _LandingPageState extends State<LandingPage> {
                         fontSize: 20,
                         fontWeight: FontWeight.w500),
                     onPressed: () =>
-                        Navigator.of(context).pushNamed(RouteNames.rHomeScreen),
-                    buttonColor: AppColors.secondryColor,
+                        Navigator.of(context).pushReplacementNamed(RouteNames.rHomePage),
+                    buttonColor: AppColors.secondaryColor,
                   ),
                   const Spacer(),
                 ],

@@ -48,7 +48,7 @@ class AppTheme {
 
   static TextStyle caption = TextStyle(
     fontWeight: FontWeight.w300,
-    color: AppColors.secondryColor,
+    color: AppColors.secondaryColor,
     fontSize: 14,
   );
 
