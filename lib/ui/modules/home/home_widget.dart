@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movies_mobile_app/bloc/movies/movies_bloc.dart';
+import 'package:movies_mobile_app/data/model/trending_2day_model.dart';
 import 'package:movies_mobile_app/data/repository/movies/movies_repository.dart';
 import 'package:movies_mobile_app/ui/style/app.colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_mobile_app/utils/router/route_names.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -73,32 +75,38 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(8)),
                                 width: MediaQuery.of(context).size.width * 0.5,
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.3,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          image: DecorationImage(
-                                              image: NetworkImage(
-                                                "https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}",
-                                              ),
-                                              fit: BoxFit.fill)),
-                                    ),
-                                    Text(
-                                      state.movies.results![index].title ??
-                                          "Null",
-                                      style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500,
-                                        overflow: TextOverflow.ellipsis,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator
+                                        .pushNamed(context,RouteNames.rDetailsPage,arguments: ScreenArguments(state.movies.results![index]));
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.3,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            image: DecorationImage(
+                                                image: NetworkImage(
+                                                  "https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}",
+                                                ),
+                                                fit: BoxFit.fill)),
                                       ),
-                                    ),
-                                  ],
+                                      Text(
+                                        state.movies.results![index].title ??
+                                            "Null",
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               );
                             }),
@@ -259,7 +267,9 @@ class _HomeWidgetState extends State<HomeWidget> {
             //                 }),
             //           );
             //         } else if (state is PopularError) {
-            //           return Container();
+            //           return Container(
+            //             child: Text(state.msgError??"Error"),
+            //           );
             //         }
             //         return CircularProgressIndicator(
             //           color: AppColors.secondaryColor,
@@ -273,4 +283,10 @@ class _HomeWidgetState extends State<HomeWidget> {
       ),
     );
   }
+}
+
+class ScreenArguments {
+  final Results movie;
+
+  ScreenArguments(this.movie);
 }

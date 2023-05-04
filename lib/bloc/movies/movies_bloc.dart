@@ -45,6 +45,8 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
       print('------------------------------------------------');
       emit(PopularSuccessful(movies));
     } catch (e) {
+      print('------------------------------------------------');
+      print('------------------------------------------------');
       emit(PopularError(e.toString()));
     }
   }

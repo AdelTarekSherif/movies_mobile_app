@@ -16,9 +16,10 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-
       providers: [
-        BlocProvider(create: (context)=>MoviesBloc(MoviesRepository()),),
+        BlocProvider(
+          create: (context) => MoviesBloc(MoviesRepository()),
+        ),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
