@@ -5,6 +5,7 @@ import 'package:movies_mobile_app/data/repository/movies/movies_repository.dart'
 import 'package:movies_mobile_app/ui/style/app.colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_mobile_app/utils/router/route_names.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -74,7 +75,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(8)),
-                                width: MediaQuery.of(context).size.width * 0.5,
+                                width: MediaQuery.of(context).size.width * 0.4,
                                 child: InkWell(
                                   onTap: () {
                                     Navigator.pushNamed(
@@ -88,14 +89,28 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         height:
                                             MediaQuery.of(context).size.height *
                                                 0.3,
+                                        width:
+                                        MediaQuery.of(context).size.width *
+                                            0.5,
                                         decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            image: DecorationImage(
-                                                image: NetworkImage(
-                                                  "https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}",
-                                                ),
-                                                fit: BoxFit.fill)),
+                                          borderRadius:
+                                          BorderRadius.circular(8),
+                                        ),
+                                        child: Stack(
+                                          alignment: Alignment.center,
+                                          children: [
+                                            Center(child: CircularProgressIndicator(color: AppColors.primaryColor,)),
+                                            state.movies.results![index].posterPath !=
+                                                null
+                                                ? FadeInImage.memoryNetwork(
+                                              image:
+                                              'https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}',
+                                              placeholder: kTransparentImage,
+                                              fit: BoxFit.contain,
+                                            )
+                                                : Container(),
+                                          ],
+                                        ),
                                       ),
                                       Text(
                                         state.movies.results![index].title ??
@@ -170,7 +185,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(8)),
-                                width: MediaQuery.of(context).size.width * 0.5,
+                                width: MediaQuery.of(context).size.width * 0.4,
                                 child: InkWell(
                                   onTap: () {
                                     Navigator.pushNamed(
@@ -185,13 +200,24 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             MediaQuery.of(context).size.height *
                                                 0.3,
                                         decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            image: DecorationImage(
-                                                image: NetworkImage(
-                                                  "https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}",
-                                                ),
-                                                fit: BoxFit.fill)),
+                                          borderRadius:
+                                          BorderRadius.circular(8),
+                                        ),
+                                        child: Stack(
+                                          alignment: Alignment.center,
+                                          children: [
+                                            Center(child: CircularProgressIndicator(color: AppColors.primaryColor,)),
+                                            state.movies.results![index].posterPath !=
+                                                null
+                                                ? FadeInImage.memoryNetwork(
+                                              image:
+                                              'https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}',
+                                              placeholder: kTransparentImage,
+                                              fit: BoxFit.contain,
+                                            )
+                                                : Container(),
+                                          ],
+                                        ),
                                       ),
                                       Text(
                                         state.movies.results![index].title ??
@@ -261,7 +287,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(8)),
-                                width: MediaQuery.of(context).size.width * 0.5,
+                                width: MediaQuery.of(context).size.width * 0.4,
                                 child: InkWell(
                                   onTap: () {
                                     Navigator.pushNamed(
@@ -276,13 +302,24 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             MediaQuery.of(context).size.height *
                                                 0.3,
                                         decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            image: DecorationImage(
-                                                image: NetworkImage(
-                                                  "https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}",
-                                                ),
-                                                fit: BoxFit.fill)),
+                                          borderRadius:
+                                          BorderRadius.circular(8),
+                                        ),
+                                        child: Stack(
+                                          alignment: Alignment.center,
+                                          children: [
+                                            Center(child: CircularProgressIndicator(color: AppColors.primaryColor,)),
+                                            state.movies.results![index].posterPath !=
+                                                null
+                                                ? FadeInImage.memoryNetwork(
+                                              image:
+                                              'https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}',
+                                              placeholder: kTransparentImage,
+                                              fit: BoxFit.contain,
+                                            )
+                                                : Container(),
+                                          ],
+                                        ),
                                       ),
                                       Text(
                                         state.movies.results![index].title ??

@@ -15,6 +15,7 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
     on<PopularEvent>(onGetPopularEvent);
     on<DetailsEvent>(onGetDetailsEvent);
     on<SearchEvent>(onGetSearchEvent);
+    on<SimilarEvent>(onGetSimilarEvent);
   }
 
   final MoviesRepository _moviesRepository;
@@ -67,6 +68,15 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
       emit(SearchSuccessful(movies));
     } catch (e) {
       emit(SearchError(e.toString()));
+    }
+  }
+  onGetSimilarEvent(SimilarEvent event, Emitter<MoviesState> emit) async {
+    try {
+      var result = await _moviesRepository.getSimilarMovies(event.id);
+      var movies = MoviesModel.fromJson(result);
+      emit(SimilarSuccessful(movies));
+    } catch (e) {
+      emit(SimilarError(e.toString()));
     }
   }
 }

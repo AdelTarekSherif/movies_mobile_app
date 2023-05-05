@@ -5,6 +5,8 @@ import 'package:movies_mobile_app/bloc/movies/movies_bloc.dart';
 import 'package:movies_mobile_app/data/repository/movies/movies_repository.dart';
 import 'package:movies_mobile_app/ui/modules/home/home_widget.dart';
 import 'package:movies_mobile_app/ui/style/app.colors.dart';
+import 'package:movies_mobile_app/utils/router/route_names.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class DetailsPage extends StatefulWidget {
   const DetailsPage({super.key});
@@ -15,6 +17,7 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   final MoviesBloc _details = MoviesBloc(MoviesRepository());
+  final MoviesBloc _similar = MoviesBloc(MoviesRepository());
 
   @override
   void initState() {
@@ -34,6 +37,7 @@ class _DetailsPageState extends State<DetailsPage> {
   Widget build(BuildContext context) {
     var movie = ModalRoute.of(context)!.settings.arguments as TrendingArguments;
     _details.add(DetailsEvent(id: movie.movie.id!));
+    _similar.add(SimilarEvent(id: movie.movie.id!));
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.primaryColor,
@@ -178,61 +182,73 @@ class _DetailsPageState extends State<DetailsPage> {
                         builder: (BuildContext context, state) {
                           if (state is DetailsSuccessful) {
                             return SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.5,
+                              height: MediaQuery.of(context).size.height * 0.48,
                               child: ListView.builder(
                                   itemCount: state.movies.cast!.length,
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (BuildContext context, index) {
                                     return Container(
                                       margin: const EdgeInsets.symmetric(
-                                          vertical: 16),
+                                          horizontal: 8, vertical: 16),
                                       padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
+                                      width: MediaQuery.of(context).size.width *
+                                          0.4,
                                       child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Container(
+                                          SizedBox(
                                             height: MediaQuery.of(context)
                                                     .size
                                                     .height *
-                                                0.3,
+                                                0.25,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width *
                                                 0.4,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                image: DecorationImage(
-                                                    image: NetworkImage(
-                                                      "https://image.tmdb.org/t/p/original${state.movies.cast![index].profilePath}",
-                                                    ),
-                                                    fit: BoxFit.fill)),
+                                            child: CircleAvatar(
+                                              backgroundImage: NetworkImage(
+                                                  'https://image.tmdb.org/t/p/original${state.movies.cast![index].profilePath}'),
+                                            ),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                              state.movies.cast![index].name ??
-                                                  "Null",
-                                              style: TextStyle(
-                                                color: AppColors
-                                                    .customGreyLevelSubtitle1,
-                                                fontSize: 22,
-                                                fontWeight: FontWeight.w700,
-                                                overflow: TextOverflow.ellipsis,
+                                          Expanded(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                state.movies.cast![index]
+                                                        .name ??
+                                                    "Null",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: AppColors
+                                                      .customGreyLevelSubtitle1,
+                                                  fontSize: 22,
+                                                  fontWeight: FontWeight.w700,
+                                                  //  overflow: TextOverflow.ellipsis,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                              state.movies.cast![index]
-                                                      .character ??
-                                                  "Null",
-                                              style: TextStyle(
-                                                color: AppColors
-                                                    .customGreyLevelSubtitle1,
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w400,
-                                                overflow: TextOverflow.ellipsis,
+                                          Expanded(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                state.movies.cast![index]
+                                                        .character ??
+                                                    "Null",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: AppColors
+                                                      .customGreyLevelSubtitle1,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w400,
+                                                  //overflow: TextOverflow.ellipsis,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -243,13 +259,117 @@ class _DetailsPageState extends State<DetailsPage> {
                             );
                           }
 
-                          return CircularProgressIndicator(
-                            color: AppColors.secondaryColor,
-                          );
+                          return Container();
                         },
                       ),
                     ],
                   ),
+                ),
+                BlocBuilder(
+                  bloc: _similar,
+                  builder: (BuildContext context, state) {
+                    if (state is SimilarSuccessful) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Similar Movies ',
+                                    style: TextStyle(
+                                        color: AppColors.secondaryColor,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.4,
+                              child: ListView.builder(
+                                  itemCount: state.movies.results?.length ?? 0,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 8, vertical: 16),
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
+                                      width: MediaQuery.of(context).size.width *
+                                          0.4,
+                                      child: InkWell(
+                                        onTap: () {
+                                          Navigator.pushNamed(
+                                              context, RouteNames.rDetailsPage,
+                                              arguments: TrendingArguments(state
+                                                  .movies.results![index]));
+                                        },
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.3,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                              ),
+                                              child: Stack(
+                                                alignment: Alignment.center,
+                                                children: [
+                                                  Center(
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                    color:
+                                                        AppColors.primaryColor,
+                                                  )),
+                                                  state.movies.results![index].posterPath !=
+                                                      null
+                                                      ? FadeInImage.memoryNetwork(
+                                                    image:
+                                                    'https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}',
+                                                    placeholder: kTransparentImage,
+                                                    fit: BoxFit.contain,
+                                                  )
+                                                      : Container(),
+                                                ],
+                                              ),
+                                            ),
+                                            Text(
+                                              state.movies.results![index]
+                                                      .title ??
+                                                  "Null",
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w500,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.secondaryColor,
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

@@ -34,3 +34,12 @@ class SearchEvent extends MoviesEvent {
   @override
   List<Object?> get props => [name];
 }
+
+class SimilarEvent extends MoviesEvent {
+  final int id;
+
+  SimilarEvent({required this.id});
+
+  @override
+  List<Object?> get props => [id];
+}

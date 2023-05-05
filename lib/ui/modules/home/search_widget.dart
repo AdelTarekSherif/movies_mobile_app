@@ -6,6 +6,7 @@ import 'package:movies_mobile_app/ui/common/custom_text_field.dart';
 import 'package:movies_mobile_app/ui/modules/home/home_widget.dart';
 import 'package:movies_mobile_app/ui/style/app.colors.dart';
 import 'package:movies_mobile_app/utils/router/route_names.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class SearchWidget extends StatefulWidget {
   const SearchWidget({Key? key}) : super(key: key);
@@ -32,7 +33,6 @@ class _SearchWidgetState extends State<SearchWidget> {
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
           child: CustomTextField(
             title: 'Search',
-
             textEditingController: name,
             onChanged: (searchText) {
               setState(() {
@@ -76,18 +76,29 @@ class _SearchWidgetState extends State<SearchWidget> {
                             },
                             child: Row(
                               children: [
-                                Container(
+                                SizedBox(
                                   height:
                                       MediaQuery.of(context).size.height * 0.15,
                                   width:
                                       MediaQuery.of(context).size.width * 0.3,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      image: DecorationImage(
-                                          image: NetworkImage(
-                                            "https://image.tmdb.org/t/p/original${state.movies.results![index].backdropPath}",
-                                          ),
-                                          fit: BoxFit.fill)),
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Center(
+                                          child: CircularProgressIndicator(
+                                        color: AppColors.primaryColor,
+                                      )),
+                                      state.movies.results![index].posterPath !=
+                                              null
+                                          ? FadeInImage.memoryNetwork(
+                                              image:
+                                                  'https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}',
+                                              placeholder: kTransparentImage,
+                                              fit: BoxFit.contain,
+                                            )
+                                          : Container(),
+                                    ],
+                                  ),
                                 ),
                                 Expanded(
                                   child: Column(
@@ -135,12 +146,13 @@ class _SearchWidgetState extends State<SearchWidget> {
                   ),
                 );
               }
-              return  Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text("Enter Movie Name",style: TextStyle(
-              fontSize: 24,
-              color: AppColors.customGreyLevelSubtitle2
-              ),),
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Enter Movie Name",
+                  style: TextStyle(
+                      fontSize: 24, color: AppColors.customGreyLevelSubtitle2),
+                ),
               );
             })
       ],

@@ -96,3 +96,21 @@ class SearchError extends MoviesState {
   @override
   List<Object?> get props => [msgError];
 }
+
+class SimilarSuccessful extends MoviesState {
+  final MoviesModel movies;
+
+  SimilarSuccessful(this.movies);
+
+  @override
+  List<Object?> get props => [movies];
+}
+
+class SimilarError extends MoviesState {
+  final String? msgError;
+
+  SimilarError(this.msgError);
+
+  @override
+  List<Object?> get props => [msgError];
+}
