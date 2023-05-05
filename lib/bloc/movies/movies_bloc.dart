@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_mobile_app/data/model/movie_details_model.dart';
-import 'package:movies_mobile_app/data/model/popular_movies_model.dart';
 import 'package:movies_mobile_app/data/model/trending_movies_model.dart';
 import 'package:movies_mobile_app/data/repository/movies/movies_repository.dart';
 
@@ -15,6 +14,7 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
     on<TrendingThisWeekEvent>(onGetTrendingMoviesThisWeekEvent);
     on<PopularEvent>(onGetPopularEvent);
     on<DetailsEvent>(onGetDetailsEvent);
+    on<SearchEvent>(onGetSearchEvent);
   }
 
   final MoviesRepository _moviesRepository;
@@ -23,7 +23,7 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
       TrendingMovies2DayEvent event, Emitter<MoviesState> emit) async {
     try {
       var result = await _moviesRepository.getTrendingMovies2day();
-      var movies = TrendingMoviesModel.fromJson(result);
+      var movies = MoviesModel.fromJson(result);
       emit(Trending2DaySuccessful(movies));
     } catch (e) {
       emit(Trending2DayError(e.toString()));
@@ -34,7 +34,7 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
       TrendingThisWeekEvent event, Emitter<MoviesState> emit) async {
     try {
       var result = await _moviesRepository.getTrendingMoviesThisWeek();
-      var movies = TrendingMoviesModel.fromJson(result);
+      var movies = MoviesModel.fromJson(result);
       emit(TrendingThisWeekSuccessful(movies));
     } catch (e) {
       emit(TrendingThisWeekError(e.toString()));
@@ -44,12 +44,9 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
   onGetPopularEvent(PopularEvent event, Emitter<MoviesState> emit) async {
     try {
       var result = await _moviesRepository.getPopular();
-      var movies = PopularMoviesModel.fromJson(result);
-      print('------------------------------------------------');
+      var movies = MoviesModel.fromJson(result);
       emit(PopularSuccessful(movies));
     } catch (e) {
-      print('------------------------------------------------');
-      print('------------------------------------------------');
       emit(PopularError(e.toString()));
     }
   }
@@ -58,12 +55,18 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
     try {
       var result = await _moviesRepository.getMovieDetails(event.id);
       var movies = MovieDetails.fromJson(result);
-      print('------------------------------------------------');
       emit(DetailsSuccessful(movies));
     } catch (e) {
-      print('------------------------------------------------');
-      print('------------------------------------------------');
       emit(DetailsError(e.toString()));
+    }
+  }
+  onGetSearchEvent(SearchEvent event, Emitter<MoviesState> emit) async {
+    try {
+      var result = await _moviesRepository.getSearchMovie(event.name);
+      var movies = MoviesModel.fromJson(result);
+      emit(SearchSuccessful(movies));
+    } catch (e) {
+      emit(SearchError(e.toString()));
     }
   }
 }

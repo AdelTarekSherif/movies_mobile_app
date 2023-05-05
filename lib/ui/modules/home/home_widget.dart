@@ -34,34 +34,34 @@ class _HomeWidgetState extends State<HomeWidget> {
         physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
+            BlocBuilder(
+              bloc: _trending2Day,
+              builder: (BuildContext context, state) {
+                if (state is Trending2DaySuccessful) {
+                  return Column(
                     children: [
-                      Text(
-                        'Trending ',
-                        style: TextStyle(
-                            color: AppColors.customGreyLevelSubtitle1,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w500),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Trending ',
+                              style: TextStyle(
+                                  color: AppColors.customGreyLevelSubtitle1,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              ' Today',
+                              style: TextStyle(
+                                  color: AppColors.customGreyLevelSubtitle2,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
                       ),
-                      Text(
-                        ' Today',
-                        style: TextStyle(
-                            color: AppColors.customGreyLevelSubtitle2,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w500),
-                      )
-                    ],
-                  ),
-                ),
-                BlocBuilder(
-                  bloc: _trending2Day,
-                  builder: (BuildContext context, state) {
-                    if (state is Trending2DaySuccessful) {
-                      return SizedBox(
+                      SizedBox(
                         height: MediaQuery.of(context).size.height * 0.4,
                         child: ListView.builder(
                             itemCount: state.movies.results!.length,
@@ -79,7 +79,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                   onTap: () {
                                     Navigator.pushNamed(
                                         context, RouteNames.rDetailsPage,
-                                        arguments: ScreenArguments(
+                                        arguments: TrendingArguments(
                                             state.movies.results![index]));
                                   },
                                   child: Column(
@@ -112,45 +112,52 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 ),
                               );
                             }),
-                      );
-                    } else if (state is Trending2DayError) {
-                      return Container();
-                    }
-                    return CircularProgressIndicator(
-                      color: AppColors.secondaryColor,
-                    );
-                  },
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        'Trending ',
-                        style: TextStyle(
-                            color: AppColors.customGreyLevelSubtitle1,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w500),
                       ),
-                      Text(
-                        ' This Week',
-                        style: TextStyle(
-                            color: AppColors.customGreyLevelSubtitle2,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w500),
-                      )
                     ],
-                  ),
-                ),
-                BlocBuilder(
-                  bloc: _trendingThisWeek,
-                  builder: (BuildContext context, state) {
-                    if (state is TrendingThisWeekSuccessful) {
-                      return SizedBox(
+                  );
+                } else if (state is Trending2DayError) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: state.msgError == 'No Internet Connection!'
+                        ? Container()
+                        : Text(
+                            state.msgError ?? "Error",
+                            style: const TextStyle(
+                                fontSize: 24, color: Colors.red),
+                          ),
+                  );
+                }
+                return Container();
+              },
+            ),
+            BlocBuilder(
+              bloc: _trendingThisWeek,
+              builder: (BuildContext context, state) {
+                if (state is TrendingThisWeekSuccessful) {
+                  return Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Trending ',
+                              style: TextStyle(
+                                  color: AppColors.customGreyLevelSubtitle1,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              ' This Week',
+                              style: TextStyle(
+                                  color: AppColors.customGreyLevelSubtitle2,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(
                         height: MediaQuery.of(context).size.height * 0.4,
                         child: ListView.builder(
                             itemCount: state.movies.results!.length,
@@ -165,10 +172,10 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     borderRadius: BorderRadius.circular(8)),
                                 width: MediaQuery.of(context).size.width * 0.5,
                                 child: InkWell(
-                                  onTap: (){
+                                  onTap: () {
                                     Navigator.pushNamed(
                                         context, RouteNames.rDetailsPage,
-                                        arguments: ScreenArguments(
+                                        arguments: TrendingArguments(
                                             state.movies.results![index]));
                                   },
                                   child: Column(
@@ -201,91 +208,118 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 ),
                               );
                             }),
-                      );
-                    } else if (state is TrendingThisWeekError) {
-                      return Container();
-                    }
-                    return CircularProgressIndicator(
-                      color: AppColors.secondaryColor,
-                    );
-                  },
-                ),
-              ],
+                      ),
+                    ],
+                  );
+                } else if (state is TrendingThisWeekError) {
+                  return Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: state.msgError == 'No Internet Connection!'
+                          ? Container()
+                          : Text(
+                              state.msgError ?? "Error",
+                              style: const TextStyle(
+                                  fontSize: 24, color: Colors.red),
+                            ),
+                    ),
+                  );
+                }
+                return Container();
+              },
             ),
-            // Column(
-            //   children: [
-            //     Padding(
-            //       padding: const EdgeInsets.all(8.0),
-            //       child: Row(
-            //         children: [
-            //           Text(
-            //             'Popular ',
-            //             style: TextStyle(
-            //                 color: AppColors.customGreyLevelSubtitle1,
-            //                 fontSize: 22,
-            //                 fontWeight: FontWeight.w500),
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //     BlocBuilder(
-            //       bloc: _popular,
-            //       builder: (BuildContext context, state) {
-            //         if (state is PopularSuccessful) {
-            //           return SizedBox(
-            //             height: MediaQuery.of(context).size.height * 0.4,
-            //             child: ListView.builder(
-            //                 itemCount: state.movies.results?.length ?? 0,
-            //                 scrollDirection: Axis.horizontal,
-            //                 itemBuilder: (BuildContext context, int index) {
-            //                   return Container(
-            //                     margin: const EdgeInsets.symmetric(
-            //                         horizontal: 8, vertical: 16),
-            //                     padding: const EdgeInsets.all(8),
-            //                     decoration: BoxDecoration(
-            //                         color: Colors.white,
-            //                         borderRadius: BorderRadius.circular(8)),
-            //                     width: MediaQuery.of(context).size.width * 0.5,
-            //                     child: Column(
-            //                       children: [
-            //                         Container(
-            //                           height:
-            //                               MediaQuery.of(context).size.height *
-            //                                   0.3,
-            //                           decoration: BoxDecoration(
-            //                               borderRadius:
-            //                                   BorderRadius.circular(8),
-            //                               image: DecorationImage(
-            //                                   image: NetworkImage(
-            //                                     "https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}",
-            //                                   ),
-            //                                   fit: BoxFit.fill)),
-            //                         ),
-            //                         Text(
-            //                           state.movies.results![index].title ??
-            //                               "Null",
-            //                           style: const TextStyle(
-            //                             color: Colors.black,
-            //                             fontSize: 20,
-            //                             fontWeight: FontWeight.w500,
-            //                             overflow: TextOverflow.ellipsis,
-            //                           ),
-            //                         ),
-            //                       ],
-            //                     ),
-            //                   );
-            //                 }),
-            //           );
-            //         } else if (state is PopularError) {
-            //           return Text(state.msgError ?? "Error");
-            //         }
-            //         return CircularProgressIndicator(
-            //           color: AppColors.secondaryColor,
-            //         );
-            //       },
-            //     ),
-            //   ],
-            // ),
+            BlocBuilder(
+              bloc: _popular,
+              builder: (BuildContext context, state) {
+                if (state is PopularSuccessful) {
+                  return Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Popular ',
+                              style: TextStyle(
+                                  color: AppColors.customGreyLevelSubtitle1,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.4,
+                        child: ListView.builder(
+                            itemCount: state.movies.results?.length ?? 0,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Container(
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 16),
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(8)),
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, RouteNames.rDetailsPage,
+                                        arguments: TrendingArguments(
+                                            state.movies.results![index]));
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.3,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            image: DecorationImage(
+                                                image: NetworkImage(
+                                                  "https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}",
+                                                ),
+                                                fit: BoxFit.fill)),
+                                      ),
+                                      Text(
+                                        state.movies.results![index].title ??
+                                            "Null",
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }),
+                      ),
+                    ],
+                  );
+                } else if (state is PopularError) {
+                  return Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        state.msgError ?? "Error",
+                        style: const TextStyle(fontSize: 24, color: Colors.red),
+                      ),
+                    ),
+                  );
+                }
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.secondaryColor,
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),
@@ -293,8 +327,8 @@ class _HomeWidgetState extends State<HomeWidget> {
   }
 }
 
-class ScreenArguments {
+class TrendingArguments {
   final Results movie;
 
-  ScreenArguments(this.movie);
+  TrendingArguments(this.movie);
 }

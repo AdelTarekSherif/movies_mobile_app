@@ -96,37 +96,47 @@ class _CustomTextFieldState extends State<CustomTextField> {
             controller: widget.textEditingController,
             initialValue: widget.initialValue,
             obscureText: widget.obscureText,
-            onChanged: widget.onChanged != null ? (value) => widget.onChanged!(value) : (value) {},
+            onChanged: widget.onChanged != null
+                ? (value) => widget.onChanged!(value)
+                : (value) {},
             inputFormatters: widget.inputFormatters,
             maxLength: widget.maxLength,
             keyboardType: widget.textInputType ?? TextInputType.text,
             validator: widget.validator != null
                 ? (value) => widget.validator!(value)
                 : (value) {
-              if (widget.isRequired) {
-                if (value == null || value.isEmpty) {
-                  return "    Data is Required   ";
-                }
-                return null;
-              } else {
-                return null;
-              }
-            },
-            onSaved: widget.onSave != null ? (value) => widget.onSave!(value) : (value) {},
+                    if (widget.isRequired) {
+                      if (value == null || value.isEmpty) {
+                        return "    Data is Required   ";
+                      }
+                      return null;
+                    } else {
+                      return null;
+                    }
+                  },
+            onSaved: widget.onSave != null
+                ? (value) => widget.onSave!(value)
+                : (value) {},
             minLines: widget.minLines,
             maxLines: widget.maxLines,
             style: widget.style ??
-                Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.black, fontWeight: FontWeight.w600),
-            textInputAction:
-            widget.textInputAction ?? (widget.nextFocusNode != null ? TextInputAction.next : TextInputAction.done),
+                Theme.of(context)
+                    .textTheme
+                    .displaySmall!
+                    .copyWith(color: Colors.black, fontWeight: FontWeight.w600),
+            textInputAction: widget.textInputAction ??
+                (widget.nextFocusNode != null
+                    ? TextInputAction.next
+                    : TextInputAction.done),
             onEditingComplete: () {
               if (widget.focusNode != null) widget.focusNode!.unfocus();
 
               widget.onDoneTapped ??
-                      () {
+                  () {
                     try {
                       FocusScopeNode currentFocus = FocusScope.of(context);
-                      if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+                      if (!currentFocus.hasPrimaryFocus &&
+                          currentFocus.focusedChild != null) {
                         currentFocus.focusedChild!.unfocus();
                       }
                     } catch (e) {
@@ -136,7 +146,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
             },
             onFieldSubmitted: (term) {
               if (widget.focusNode != null) widget.focusNode!.unfocus();
-              if (widget.nextFocusNode != null) FocusScope.of(context).requestFocus(widget.nextFocusNode);
+              if (widget.nextFocusNode != null) {
+                FocusScope.of(context).requestFocus(widget.nextFocusNode);
+              }
             },
             decoration: widget.inputDecoration ??
                 InputDecoration(
@@ -149,23 +161,30 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   suffixIcon: widget.suffixIcon,
                   counterText: '',
                   labelStyle: widget.labelStyle ??
-                      Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.black.withOpacity(0.4)),
+                      Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(color: Colors.black.withOpacity(0.4)),
                   contentPadding: EdgeInsets.only(
                       left: 14.0,
                       right: 14,
                       top: widget.contentTopPadding != null
                           ? widget.contentTopPadding!
                           : widget.prefixIcon != null
-                          ? 18
-                          : 14,
-                      bottom: widget.contentTopPadding != null ? widget.contentTopPadding! : 14),
+                              ? 18
+                              : 14,
+                      bottom: widget.contentTopPadding != null
+                          ? widget.contentTopPadding!
+                          : 14),
                   focusedBorder: widget.focusedBorder ??
                       OutlineInputBorder(
                         borderSide: BorderSide(color: AppColors.primaryColor),
-                        borderRadius: BorderRadius.circular(widget.cornerRadius),
+                        borderRadius:
+                            BorderRadius.circular(widget.cornerRadius),
                       ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Color(0xFFDADADA), width: 1),
+                    borderSide:
+                        const BorderSide(color: Color(0xFFDADADA), width: 1),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   errorBorder: OutlineInputBorder(

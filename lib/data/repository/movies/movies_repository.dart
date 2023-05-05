@@ -27,4 +27,10 @@ class MoviesRepository {
     var response = await _apiCaller.getData();
     return response;
   }
+
+  Future getSearchMovie(String name) async {
+    _apiCaller.setUrl("/search/movie?api_key=${Constants.apiKey}&query=$name");
+    var response = await _apiCaller.getData();
+    return response;
+  }
 }

@@ -25,3 +25,12 @@ class DetailsEvent extends MoviesEvent {
   @override
   List<Object?> get props => [id];
 }
+
+class SearchEvent extends MoviesEvent {
+  final String name;
+
+  SearchEvent({required this.name});
+
+  @override
+  List<Object?> get props => [name];
+}

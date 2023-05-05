@@ -8,7 +8,7 @@ class MoviesInitial extends MoviesState {
 }
 
 class Trending2DaySuccessful extends MoviesState {
-  final TrendingMoviesModel movies;
+  final MoviesModel movies;
 
   Trending2DaySuccessful(this.movies);
 
@@ -26,7 +26,7 @@ class Trending2DayError extends MoviesState {
 }
 
 class TrendingThisWeekSuccessful extends MoviesState {
-  final TrendingMoviesModel movies;
+  final MoviesModel movies;
 
   TrendingThisWeekSuccessful(this.movies);
 
@@ -44,7 +44,7 @@ class TrendingThisWeekError extends MoviesState {
 }
 
 class PopularSuccessful extends MoviesState {
-  final PopularMoviesModel movies;
+  final MoviesModel movies;
 
   PopularSuccessful(this.movies);
 
@@ -74,6 +74,24 @@ class DetailsError extends MoviesState {
   final String? msgError;
 
   DetailsError(this.msgError);
+
+  @override
+  List<Object?> get props => [msgError];
+}
+
+class SearchSuccessful extends MoviesState {
+  final MoviesModel movies;
+
+  SearchSuccessful(this.movies);
+
+  @override
+  List<Object?> get props => [movies];
+}
+
+class SearchError extends MoviesState {
+  final String? msgError;
+
+  SearchError(this.msgError);
 
   @override
   List<Object?> get props => [msgError];

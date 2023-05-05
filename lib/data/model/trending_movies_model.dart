@@ -1,13 +1,13 @@
-class TrendingMoviesModel {
+class MoviesModel {
   int? page;
   List<Results>? results;
   int? totalPages;
   int? totalResults;
 
-  TrendingMoviesModel(
+  MoviesModel(
       {this.page, this.results, this.totalPages, this.totalResults});
 
-  TrendingMoviesModel.fromJson(Map<String, dynamic> json) {
+  MoviesModel.fromJson(Map<String, dynamic> json) {
     page = json['page'];
     if (json['results'] != null) {
       results = <Results>[];
@@ -45,25 +45,25 @@ class Results {
   double? popularity;
   String? releaseDate;
   bool? video;
-  double? voteAverage;
+  dynamic voteAverage;
   int? voteCount;
 
   Results(
       {this.adult,
-        this.backdropPath,
-        this.id,
-        this.title,
-        this.originalLanguage,
-        this.originalTitle,
-        this.overview,
-        this.posterPath,
-        this.mediaType,
-        this.genreIds,
-        this.popularity,
-        this.releaseDate,
-        this.video,
-        this.voteAverage,
-        this.voteCount});
+      this.backdropPath,
+      this.id,
+      this.title,
+      this.originalLanguage,
+      this.originalTitle,
+      this.overview,
+      this.posterPath,
+      this.mediaType,
+      this.genreIds,
+      this.popularity,
+      this.releaseDate,
+      this.video,
+      this.voteAverage,
+      this.voteCount});
 
   Results.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];

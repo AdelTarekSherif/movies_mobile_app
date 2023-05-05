@@ -32,10 +32,28 @@ class _DetailsPageState extends State<DetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    var movie = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
+    var movie = ModalRoute.of(context)!.settings.arguments as TrendingArguments;
     _details.add(DetailsEvent(id: movie.movie.id!));
     return SafeArea(
       child: Scaffold(
+        backgroundColor: AppColors.primaryColor,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: BackButton(
+            color: AppColors.secondaryColor,
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          title: Text(
+            movie.movie.title ?? " ",
+            style: TextStyle(
+                color: AppColors.secondaryColor,
+                fontSize: 25,
+                fontWeight: FontWeight.w900),
+          ),
+        ),
         body: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: SingleChildScrollView(
@@ -60,14 +78,8 @@ class _DetailsPageState extends State<DetailsPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              BackButton(
-                                color: AppColors.secondaryColor,
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
                               Stack(
                                 children: [
                                   Icon(
@@ -100,20 +112,15 @@ class _DetailsPageState extends State<DetailsPage> {
                     ),
                   ],
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: AppColors.primaryColor,
-                      borderRadius: BorderRadius.circular(0)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      textAlign: TextAlign.center,
-                      movie.movie.title ?? " ",
-                      style: TextStyle(
-                          color: AppColors.secondaryColor,
-                          fontSize: 25,
-                          fontWeight: FontWeight.w900),
-                    ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    movie.movie.title ?? " ",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: AppColors.secondaryColor,
+                        fontSize: 25,
+                        fontWeight: FontWeight.w900),
                   ),
                 ),
                 Padding(
@@ -127,7 +134,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             Text(
                               "Overview",
                               style: TextStyle(
-                                  color: AppColors.primaryColor,
+                                  color: AppColors.secondaryColor,
                                   fontSize: 25,
                                   fontWeight: FontWeight.w700),
                             ),
@@ -138,9 +145,9 @@ class _DetailsPageState extends State<DetailsPage> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           movie.movie.overview ?? " ",
-                          style: const TextStyle(
+                          style: TextStyle(
                               wordSpacing: 1,
-                              color: Colors.black,
+                              color: AppColors.customGreyLevelSubtitle1,
                               fontSize: 18,
                               fontWeight: FontWeight.w400),
                         ),
@@ -159,7 +166,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             Text(
                               "Top Actors",
                               style: TextStyle(
-                                  color: AppColors.primaryColor,
+                                  color: AppColors.secondaryColor,
                                   fontSize: 25,
                                   fontWeight: FontWeight.w700),
                             ),
@@ -183,14 +190,17 @@ class _DetailsPageState extends State<DetailsPage> {
                                       child: Column(
                                         children: [
                                           Container(
-                                            height:
-                                            MediaQuery.of(context).size.height *
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
                                                 0.3,
-                                            width:MediaQuery.of(context).size.width *
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
                                                 0.4,
                                             decoration: BoxDecoration(
                                                 borderRadius:
-                                                BorderRadius.circular(8),
+                                                    BorderRadius.circular(8),
                                                 image: DecorationImage(
                                                     image: NetworkImage(
                                                       "https://image.tmdb.org/t/p/original${state.movies.cast![index].profilePath}",
@@ -202,20 +212,24 @@ class _DetailsPageState extends State<DetailsPage> {
                                             child: Text(
                                               state.movies.cast![index].name ??
                                                   "Null",
-                                              style: const TextStyle(
-                                                color: Colors.black,
+                                              style: TextStyle(
+                                                color: AppColors
+                                                    .customGreyLevelSubtitle1,
                                                 fontSize: 22,
                                                 fontWeight: FontWeight.w700,
                                                 overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
-                                          ),Padding(
+                                          ),
+                                          Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: Text(
-                                              state.movies.cast![index].character ??
+                                              state.movies.cast![index]
+                                                      .character ??
                                                   "Null",
-                                              style: const TextStyle(
-                                                color: Colors.black,
+                                              style: TextStyle(
+                                                color: AppColors
+                                                    .customGreyLevelSubtitle1,
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w400,
                                                 overflow: TextOverflow.ellipsis,
