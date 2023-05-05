@@ -8,7 +8,7 @@ class SearchWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Spacer(),
+        const Spacer(),
         CustomTextField(
           cornerRadius: 50,
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
@@ -19,7 +19,7 @@ class SearchWidget extends StatelessWidget {
                 color: Colors.black,
               )),
         ),
-        Spacer(flex: 5,),
+        const Spacer(flex: 5,),
       ],
     );
   }

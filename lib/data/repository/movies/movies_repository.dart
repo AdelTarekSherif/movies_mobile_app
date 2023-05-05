@@ -21,4 +21,10 @@ class MoviesRepository {
     var response = await _apiCaller.getData();
     return response;
   }
+
+  Future getMovieDetails(int? id) async {
+    _apiCaller.setUrl("/movie/$id/credits?api_key=${Constants.apiKey}");
+    var response = await _apiCaller.getData();
+    return response;
+  }
 }

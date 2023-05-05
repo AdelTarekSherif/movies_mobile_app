@@ -60,3 +60,21 @@ class PopularError extends MoviesState {
   @override
   List<Object?> get props => [msgError];
 }
+
+class DetailsSuccessful extends MoviesState {
+  final MovieDetails movies;
+
+  DetailsSuccessful(this.movies);
+
+  @override
+  List<Object?> get props => [movies];
+}
+
+class DetailsError extends MoviesState {
+  final String? msgError;
+
+  DetailsError(this.msgError);
+
+  @override
+  List<Object?> get props => [msgError];
+}

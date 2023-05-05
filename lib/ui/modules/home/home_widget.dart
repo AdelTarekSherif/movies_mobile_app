@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_mobile_app/bloc/movies/movies_bloc.dart';
-import 'package:movies_mobile_app/data/model/trending_2day_model.dart';
+import 'package:movies_mobile_app/data/model/trending_movies_model.dart';
 import 'package:movies_mobile_app/data/repository/movies/movies_repository.dart';
 import 'package:movies_mobile_app/ui/style/app.colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,14 +14,14 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  final MoviesBloc _moviesBloc = MoviesBloc(MoviesRepository());
+  final MoviesBloc _trending2Day = MoviesBloc(MoviesRepository());
   final MoviesBloc _trendingThisWeek = MoviesBloc(MoviesRepository());
   final MoviesBloc _popular = MoviesBloc(MoviesRepository());
 
   @override
   void initState() {
     super.initState();
-    _moviesBloc.add(TrendingMovies2DayEvent());
+    _trending2Day.add(TrendingMovies2DayEvent());
     _trendingThisWeek.add(TrendingThisWeekEvent());
     _popular.add(PopularEvent());
   }
@@ -58,7 +58,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   ),
                 ),
                 BlocBuilder(
-                  bloc: _moviesBloc,
+                  bloc: _trending2Day,
                   builder: (BuildContext context, state) {
                     if (state is Trending2DaySuccessful) {
                       return SizedBox(
@@ -77,8 +77,10 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 width: MediaQuery.of(context).size.width * 0.5,
                                 child: InkWell(
                                   onTap: () {
-                                    Navigator
-                                        .pushNamed(context,RouteNames.rDetailsPage,arguments: ScreenArguments(state.movies.results![index]));
+                                    Navigator.pushNamed(
+                                        context, RouteNames.rDetailsPage,
+                                        arguments: ScreenArguments(
+                                            state.movies.results![index]));
                                   },
                                   child: Column(
                                     children: [
@@ -162,32 +164,40 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(8)),
                                 width: MediaQuery.of(context).size.width * 0.5,
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.3,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          image: DecorationImage(
-                                              image: NetworkImage(
-                                                "https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}",
-                                              ),
-                                              fit: BoxFit.fill)),
-                                    ),
-                                    Text(
-                                      state.movies.results![index].title ??
-                                          "Null",
-                                      style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500,
-                                        overflow: TextOverflow.ellipsis,
+                                child: InkWell(
+                                  onTap: (){
+                                    Navigator.pushNamed(
+                                        context, RouteNames.rDetailsPage,
+                                        arguments: ScreenArguments(
+                                            state.movies.results![index]));
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.3,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            image: DecorationImage(
+                                                image: NetworkImage(
+                                                  "https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}",
+                                                ),
+                                                fit: BoxFit.fill)),
                                       ),
-                                    ),
-                                  ],
+                                      Text(
+                                        state.movies.results![index].title ??
+                                            "Null",
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               );
                             }),
@@ -267,9 +277,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             //                 }),
             //           );
             //         } else if (state is PopularError) {
-            //           return Container(
-            //             child: Text(state.msgError??"Error"),
-            //           );
+            //           return Text(state.msgError ?? "Error");
             //         }
             //         return CircularProgressIndicator(
             //           color: AppColors.secondaryColor,

@@ -16,3 +16,12 @@ class PopularEvent extends MoviesEvent {
   @override
   List<Object?> get props => [];
 }
+
+class DetailsEvent extends MoviesEvent {
+  final int id;
+
+  DetailsEvent({required this.id});
+
+  @override
+  List<Object?> get props => [id];
+}

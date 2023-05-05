@@ -10,4 +10,5 @@ class AppColors {
 
   static Color customGreyLevelSubtitle1 = const Color(0xFFFFFFFF);
   static Color customGreyLevelSubtitle2 = const Color(0xFFFCA311);
+  static Color customGreyLevel = const Color(0x8CFFFFFF);
 }
