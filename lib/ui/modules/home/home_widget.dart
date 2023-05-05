@@ -350,9 +350,12 @@ class _HomeWidgetState extends State<HomeWidget> {
                     ),
                   );
                 }
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.secondaryColor,
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.secondaryColor,
+                    ),
                   ),
                 );
               },
