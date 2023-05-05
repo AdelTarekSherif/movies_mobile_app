@@ -34,9 +34,9 @@ class _LandingPageState extends State<LandingPage> {
       backgroundColor: AppColors.scaffoldBackgroundColor,
       body: Column(
         children: [
-          Container(
+          SizedBox(
             width: MediaQuery.of(context).size.width,
-            color: Colors.white,
+            height: MediaQuery.of(context).size.height * 0.6,
             child: Image.asset(
               'assets/images/poster.png',
               fit: BoxFit.fill,
@@ -50,26 +50,24 @@ class _LandingPageState extends State<LandingPage> {
                   const Spacer(),
                   RichText(
                     text: TextSpan(
-                      text: 'Millions of movies,\n',
-                      style: AppTheme.landingTextStyle(context),
-                      children:  [
-                        const TextSpan(
-                        text: 'TV shows and people.\n',
-                        ),
-                        const TextSpan(
-                          text: 'To discover.',
-                        ),
-                        TextSpan(
-                          text: ' Explore now.',
-                          style: TextStyle(
-                            fontSize: 26,
-                            color: AppColors.customGreyLevelSubtitle2,
-                            fontWeight: FontWeight.w500,
+                        text: 'Millions of movies,\n',
+                        style: AppTheme.landingTextStyle(context),
+                        children: [
+                          const TextSpan(
+                            text: 'TV shows and people.\n',
                           ),
-                        ),
-                      ]
-                    ),
-
+                          const TextSpan(
+                            text: 'To discover.',
+                          ),
+                          TextSpan(
+                            text: ' Explore now.',
+                            style: TextStyle(
+                              fontSize: 26,
+                              color: AppColors.customGreyLevelSubtitle2,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ]),
                   ),
                   const Spacer(),
                   CustomButton(
@@ -80,8 +78,8 @@ class _LandingPageState extends State<LandingPage> {
                         color: Colors.black,
                         fontSize: 20,
                         fontWeight: FontWeight.w500),
-                    onPressed: () =>
-                        Navigator.of(context).pushReplacementNamed(RouteNames.rHomePage),
+                    onPressed: () => Navigator.of(context)
+                        .pushReplacementNamed(RouteNames.rHomePage),
                     buttonColor: AppColors.secondaryColor,
                   ),
                   const Spacer(),
