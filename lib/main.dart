@@ -8,6 +8,7 @@ import 'package:movies_mobile_app/utils/router/route_generator.dart';
 import 'package:movies_mobile_app/utils/router/route_names.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   /// Lock device on portrait mode only
   SystemChrome
       .setPreferredOrientations([
