@@ -226,8 +226,8 @@ class _DetailsPageState extends State<DetailsPage> {
                                                 style: TextStyle(
                                                   color: AppColors
                                                       .customGreyLevelSubtitle1,
-                                                  fontSize: 22,
-                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w800,
                                                   //  overflow: TextOverflow.ellipsis,
                                                 ),
                                               ),
@@ -245,8 +245,8 @@ class _DetailsPageState extends State<DetailsPage> {
                                                 style: TextStyle(
                                                   color: AppColors
                                                       .customGreyLevelSubtitle1,
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w300,
                                                   //overflow: TextOverflow.ellipsis,
                                                 ),
                                               ),
@@ -331,14 +331,17 @@ class _DetailsPageState extends State<DetailsPage> {
                                                     color:
                                                         AppColors.primaryColor,
                                                   )),
-                                                  state.movies.results![index].posterPath !=
-                                                      null
-                                                      ? FadeInImage.memoryNetwork(
-                                                    image:
-                                                    'https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}',
-                                                    placeholder: kTransparentImage,
-                                                    fit: BoxFit.contain,
-                                                  )
+                                                  state.movies.results![index]
+                                                              .posterPath !=
+                                                          null
+                                                      ? FadeInImage
+                                                          .memoryNetwork(
+                                                          image:
+                                                              'https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}',
+                                                          placeholder:
+                                                              kTransparentImage,
+                                                          fit: BoxFit.contain,
+                                                        )
                                                       : Container(),
                                                 ],
                                               ),
@@ -349,8 +352,8 @@ class _DetailsPageState extends State<DetailsPage> {
                                                   "Null",
                                               style: const TextStyle(
                                                 color: Colors.black,
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w500,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w400,
                                                 overflow: TextOverflow.ellipsis,
                                               ),
                                             ),

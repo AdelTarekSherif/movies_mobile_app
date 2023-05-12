@@ -48,19 +48,18 @@ class Cast {
   String? creditId;
   int? order;
 
-  Cast(
-      {this.adult,
-        this.gender,
-        this.id,
-        this.knownForDepartment,
-        this.name,
-        this.originalName,
-        this.popularity,
-        this.profilePath,
-        this.castId,
-        this.character,
-        this.creditId,
-        this.order});
+  Cast({this.adult,
+    this.gender,
+    this.id,
+    this.knownForDepartment,
+    this.name,
+    this.originalName,
+    this.popularity,
+    this.profilePath,
+    this.castId,
+    this.character,
+    this.creditId,
+    this.order});
 
   Cast.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
@@ -108,18 +107,17 @@ class Crew {
   String? department;
   String? job;
 
-  Crew(
-      {this.adult,
-        this.gender,
-        this.id,
-        this.knownForDepartment,
-        this.name,
-        this.originalName,
-        this.popularity,
-        this.profilePath,
-        this.creditId,
-        this.department,
-        this.job});
+  Crew({this.adult,
+    this.gender,
+    this.id,
+    this.knownForDepartment,
+    this.name,
+    this.originalName,
+    this.popularity,
+    this.profilePath,
+    this.creditId,
+    this.department,
+    this.job});
 
   Crew.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];

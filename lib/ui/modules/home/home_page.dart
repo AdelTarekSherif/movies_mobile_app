@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: AppColors.secondaryColor,
-          unselectedItemColor: AppColors.primaryColor,
+          unselectedItemColor: Colors.white,
           onTap: _onItemTapped,
         ),
         body: _widgetOptions[_selectedIndex],

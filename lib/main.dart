@@ -9,15 +9,13 @@ import 'package:movies_mobile_app/utils/router/route_names.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
   /// Lock device on portrait mode only
-  SystemChrome
-      .setPreferredOrientations([
+  SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
-  ])
-      .then((value) =>
-      runApp(const MyHomePage()));
-  }
+  ]).then((value) => runApp(const MyHomePage()));
+}
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_mobile_app/bloc/movies/movies_bloc.dart';
-import 'package:movies_mobile_app/data/model/trending_movies_model.dart';
+import 'package:movies_mobile_app/data/model/movies_model.dart';
 import 'package:movies_mobile_app/data/repository/movies/movies_repository.dart';
 import 'package:movies_mobile_app/ui/style/app.colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -90,24 +90,30 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             MediaQuery.of(context).size.height *
                                                 0.3,
                                         width:
-                                        MediaQuery.of(context).size.width *
-                                            0.5,
+                                            MediaQuery.of(context).size.width *
+                                                0.5,
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                          BorderRadius.circular(8),
+                                              BorderRadius.circular(8),
                                         ),
                                         child: Stack(
                                           alignment: Alignment.center,
                                           children: [
-                                            Center(child: CircularProgressIndicator(color: AppColors.primaryColor,)),
-                                            state.movies.results![index].posterPath !=
-                                                null
+                                            Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                              color: AppColors.primaryColor,
+                                            )),
+                                            state.movies.results![index]
+                                                        .posterPath !=
+                                                    null
                                                 ? FadeInImage.memoryNetwork(
-                                              image:
-                                              'https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}',
-                                              placeholder: kTransparentImage,
-                                              fit: BoxFit.contain,
-                                            )
+                                                    image:
+                                                        'https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}',
+                                                    placeholder:
+                                                        kTransparentImage,
+                                                    fit: BoxFit.contain,
+                                                  )
                                                 : Container(),
                                           ],
                                         ),
@@ -117,8 +123,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             "Null",
                                         style: const TextStyle(
                                           color: Colors.black,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w400,
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
@@ -201,20 +207,26 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                 0.3,
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                          BorderRadius.circular(8),
+                                              BorderRadius.circular(8),
                                         ),
                                         child: Stack(
                                           alignment: Alignment.center,
                                           children: [
-                                            Center(child: CircularProgressIndicator(color: AppColors.primaryColor,)),
-                                            state.movies.results![index].posterPath !=
-                                                null
+                                            Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                              color: AppColors.primaryColor,
+                                            )),
+                                            state.movies.results![index]
+                                                        .posterPath !=
+                                                    null
                                                 ? FadeInImage.memoryNetwork(
-                                              image:
-                                              'https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}',
-                                              placeholder: kTransparentImage,
-                                              fit: BoxFit.contain,
-                                            )
+                                                    image:
+                                                        'https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}',
+                                                    placeholder:
+                                                        kTransparentImage,
+                                                    fit: BoxFit.contain,
+                                                  )
                                                 : Container(),
                                           ],
                                         ),
@@ -224,8 +236,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             "Null",
                                         style: const TextStyle(
                                           color: Colors.black,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w400,
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
@@ -303,20 +315,26 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                 0.3,
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                          BorderRadius.circular(8),
+                                              BorderRadius.circular(8),
                                         ),
                                         child: Stack(
                                           alignment: Alignment.center,
                                           children: [
-                                            Center(child: CircularProgressIndicator(color: AppColors.primaryColor,)),
-                                            state.movies.results![index].posterPath !=
-                                                null
+                                            Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                              color: AppColors.primaryColor,
+                                            )),
+                                            state.movies.results![index]
+                                                        .posterPath !=
+                                                    null
                                                 ? FadeInImage.memoryNetwork(
-                                              image:
-                                              'https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}',
-                                              placeholder: kTransparentImage,
-                                              fit: BoxFit.contain,
-                                            )
+                                                    image:
+                                                        'https://image.tmdb.org/t/p/original${state.movies.results![index].posterPath}',
+                                                    placeholder:
+                                                        kTransparentImage,
+                                                    fit: BoxFit.contain,
+                                                  )
                                                 : Container(),
                                           ],
                                         ),
@@ -326,8 +344,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             "Null",
                                         style: const TextStyle(
                                           color: Colors.black,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w400,
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),

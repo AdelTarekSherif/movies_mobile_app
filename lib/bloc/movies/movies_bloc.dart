@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_mobile_app/data/model/movie_details_model.dart';
-import 'package:movies_mobile_app/data/model/trending_movies_model.dart';
+import 'package:movies_mobile_app/data/model/movies_model.dart';
 import 'package:movies_mobile_app/data/repository/movies/movies_repository.dart';
 
 part 'movies_event.dart';

@@ -12,9 +12,3 @@ class NetworkInfoImpl implements NetworkInfo {
   @override
   Future<bool> get isConnected => _internetConnectionChecker.hasConnection;
 }
-
-class NoInternetConnection {
-  final String message;
-
-  NoInternetConnection(this.message);
-}
