@@ -215,40 +215,32 @@ class _DetailsPageState extends State<DetailsPage> {
                                             ),
                                           ),
                                           Expanded(
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                state.movies.cast![index]
-                                                        .name ??
-                                                    "Null",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  color: AppColors
-                                                      .customGreyLevelSubtitle1,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w800,
-                                                  //  overflow: TextOverflow.ellipsis,
-                                                ),
+                                            child: Text(
+                                              state.movies.cast![index]
+                                                      .name ??
+                                                  "Null",
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                color: AppColors
+                                                    .customGreyLevelSubtitle1,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w800,
+                                                //  overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
                                           ),
                                           Expanded(
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                state.movies.cast![index]
-                                                        .character ??
-                                                    "Null",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  color: AppColors
-                                                      .customGreyLevelSubtitle1,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w300,
-                                                  //overflow: TextOverflow.ellipsis,
-                                                ),
+                                            child: Text(
+                                              state.movies.cast![index]
+                                                      .character ??
+                                                  "Null",
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                color: AppColors
+                                                    .customGreyLevelSubtitle1,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w300,
+                                                //overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
                                           ),
