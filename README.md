@@ -8,7 +8,7 @@
 (Nathalie Nader				    191800001)
 (Seif Magdy				        191800056)
 
-![WhatsApp Image 2023-05-13 at 6 40 47 PM](https://github.com/AdelTarekSherif/movies_mobile_app/assets/92861107/5426f1a8-ca09-4d33-996c-eaf8f6f1deab)
-![WhatsApp Image 2023-05-13 at 6 40 49 PM (1)](https://github.com/AdelTarekSherif/movies_mobile_app/assets/92861107/26273945-951c-4c1f-b192-24fd6dc033a5)
-![WhatsApp Image 2023-05-13 at 6 40 49 PM](https://github.com/AdelTarekSherif/movies_mobile_app/assets/92861107/f33149d7-52a2-4d7d-bcc8-eb1c848dfbd5)
-![WhatsApp Image 2023-05-13 at 6 40 48 PM](https://github.com/AdelTarekSherif/movies_mobile_app/assets/92861107/54bc12e9-47a3-4436-8b6b-aa6f316b2e47)
+![Landing](https://github.com/AdelTarekSherif/movies_mobile_app/assets/92861107/b9b53e8e-a29f-48b3-abe0-f03baaf69dcc)
+![Home](https://github.com/AdelTarekSherif/movies_mobile_app/assets/92861107/c0ea4451-9fd6-4a42-a7fd-0d3af0b93cb2)
+![Details](https://github.com/AdelTarekSherif/movies_mobile_app/assets/92861107/54b1a118-7c46-4d09-8837-89eb5fa611ca)
+![Search](https://github.com/AdelTarekSherif/movies_mobile_app/assets/92861107/3f3f9ffc-004c-4b6f-b580-ee02b1e64629)
