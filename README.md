@@ -2,11 +2,17 @@
 
 
 (Adel Tarek				        191800032))
+
 (Alaa Osama Yahya          191800029)
+
 (Alaa Tarek Abbas          191800179)
+
 (Anas Khaled				        191800038)
+
 (Nathalie Nader				    191800001)
+
 (Seif Magdy				        191800056)
+
 
 ![Landing](https://github.com/AdelTarekSherif/movies_mobile_app/assets/92861107/b9b53e8e-a29f-48b3-abe0-f03baaf69dcc)
 
